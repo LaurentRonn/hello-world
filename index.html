@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title> 360 Image Browser </title>
+  <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+  <meta name="description" content="Image Gallery">
+</head>
+
+<body>
+  <a-scene>
+    <!-- Preloaded assets -->
+    <a-assets>
+      <!-- Audio -->
+      <audio id="click-sound" src="./assets/Audio/Happy Confirmation.mp3"></audio>
+
+      <!-- Images -->
+
+      <img id="city" src="./assets/StarWarsDemo/MadeByDavidHenchey01.jpg"></img>
+      <img id="city-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg"></img>
+      <img id="cubes" src="./assets/StarWarsDemo/MadeByDavidHenchey02.jpg"></img>
+      <img id="cubes-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg"></img>
+      <img id="templelight" src="./assets/StarWarsDemo/a4dd.jpg"></img>
+      <img id="redhangar" src="./assets/StarWarsDemo/MadeByKahlilReedy.jpg"></img>
+      <img id="sechelt-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg"></img>
+
+      <!-- Palpamin Gallery -->
+      <img id="starter" src="./assets/StarWarsDemo/dwer.jpg"></img>
+
+
+
+      <!-- Link template -->
+      <script id="plane" type="text/html">
+        <a-entity
+        class="link"
+        geometry="primitive: plane; height:1; width:1"
+        material="shader: flat; src: ${thumbs}"
+        sound="on: triggerdown; src: #click-sound"
+        event-set__mouseenter="scale: 1.2 1.2 1"
+        event-set__mouseleave="scale: 1 1 1"
+        event-set__click="_target: #image-360; _delay:300; material.src: ${src}"
+        proxy-event="event: triggerdown; to: #image-360; as: fade"></a-entity>
+      </script>
+    </a-assets>
+
+    <!-- 360-degree image -->
+    <a-sky
+    id="image-360" radius="10" src="#city"
+    animation__fade="property: components.material.material.color; type:color; from: #FFF; to: #000; dur: 300; startEvents: fade"
+    animation__fadeback="property: components.material.material.color; type:color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"></a-sky>
+
+    <!-- Pass image sources to the template -->
+    <a-entity id="links" layout="type: circle; radius: 2; plane: xz" position="-1 -2 -3" rotation="-20 0 0">
+      <a-entity template="src: #plane" data-src="#city" data-thumbs="#city-thumb"></a-entity>
+      <a-entity template="src: #plane" data-src="#cubes"  data-thumbs="#cubes-thumb"></a-entity>
+      <a-entity template="src: #plane" data-src="#templelight" data-thumbs="#sechelt-thumb"></a-entity>
+      <a-entity template="src: #plane" data-src="#starter" data-thumbs="#city-thumb"></a-entity>
+      <a-entity template="src: #plane" data-src="#redhangar" data-thumbs="#city-thumb"></a-entity>
+
+    </a-entity>
+
+    <!-- Camera + Cursor -->
+
+    <!--a-camera>
+      <a-cursor
+      id="cursor"
+      animation__click="property:scale; from:0.1 0.1 0.1; to: 1 1 1; easing: easeInCubic; dur: 150; startEvents: triggerdown"
+      animation__clickreset="property:scale; to:0.1 0.1 0.1; dur: 1; startEvents: animationcomplete__click"
+      animation__fusing="property:scale; from:1 1 1; to: 0.1 0.1 0.1; easing: easeInCubic; dur: 150; startEvents: fusing"></a-cursor>
+    </a-camera-->
+
+<a-entity id="cameraRig">
+    <a-camera
+    id="camera"
+    position="-1 0 0"
+    <a-entity
+    id="cursor"
+    animation__click="property:scale; from:0.1 0.1 0.1; to: 1 1 1; easing: easeInCubic; dur: 150; startEvents: triggerdown"
+    animation__clickreset="property:scale; to:0.1 0.1 0.1; dur: 1; startEvents: animationcomplete__click"
+    animation__fusing="property:scale; from:1 1 1; to: 0.1 0.1 0.1; easing: easeInCubic; dur: 150; startEvents: fusing"></a-entity>
+  </a-camera>
+
+    <a-entity
+    id="controller"
+    position="0 0 -1"
+    oculus-go-controls="hand: right"
+    teleport-controls="cameraRig: #cameraRig; teleportOrigin: #camera; maxLength: 20"
+    laser-controls="hand: right"
+    raycaster="showLine: true; far: 100" line="color: rgb(230, 144, 10); opacity: 0.5"></a-entity>
+
+
+  </a-entity>
+
+  </a-scene>
+</body>
+</html>
