@@ -1,0 +1,82 @@
+<head>
+  <title>A-Frame Super Shooter Kit - Basic</title>
+  <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+  <script src="./assets/js/aframe-super-shooter-kit.js"></script>
+  <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+  <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+  <script>
+    /**
+     * Click triggerdown to shoot.
+     */
+    AFRAME.registerComponent('click-to-shoot', {
+      init: function () {
+        document.body.addEventListener('triggerdown', () => { this.el.emit('shoot'); });
+      }
+    });
+
+    /**
+     * Change color when hit.
+     */
+    AFRAME.registerComponent('hit-handler', {
+      dependencies: ['material'],
+
+      init: function () {
+        var color;
+        var el = this.el;
+
+        color = new THREE.Color();
+        color.set('#666');
+        el.components.material.material.color.copy(color);
+        el.addEventListener('hit', () => {
+          color.addScalar(0.05);
+          el.components.material.material.color.copy(color);
+        });
+
+        el.addEventListener('die', () => {
+          color.setRGB(0, 0, 1);
+          el.components.material.material.color.copy(color);
+        });
+      }
+    });
+  </script>
+
+  <!--Preloaded Assets-->
+
+
+</head>
+
+<body>
+
+  <a-scene >
+<a-assets>
+
+   </a-assets>
+
+
+    <!-- a-entity environment></a-entity-->
+    <a-sky src="#03"></a-sky>
+
+    <!--a-entity id="bulletTemplate" bullet geometry="primitive: icosahedron; radius: 0.01" material="color: orange"></a-entity-->
+    <a-entity id="bulletTemplate" bullet="speed: 20" geometry="primitive: icosahedron; radius: 0.05" material="color: orange"></a-entity>
+
+    <!--a-entity class="target" target="healthPoints: 10" geometry="primitive: box" material="color: teal" position="0 0 -4" hit-handler></a-entity-->
+
+    <a-entity class="target" target="healthPoints: 10" geometry="" material="color: red" position="0 0.70016 -4" hit-handler="" scale="0.5 1.58 0.36"></a-entity>
+    <a-entity class="target" target="healthPoints: 10" geometry="" material="color: red; flatShading: true" position="1.99046 0.70016 -4" hit-handler="" scale="0.5 1.58 0.36"></a-entity>
+
+  <!--  <a-entity id="gun" shooter geometry="primitive: box; width: 0.1; height: 0.1; depth: 0.3" material="color: red" click-to-shoot position="0 0 -1"></a-entity>-->
+
+
+
+<a-entity id="cameraRig">
+    <a-camera id="camera" position="-1 0 0"></a-camera>
+
+    <a-entity id="gun" shooter="" click-to-shoot="" position="0 0 -1" oculus-go-controls="hand: right" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #camera; maxLength: 20" ></a-entity>
+
+    <!-- Oculus go controls -->
+    <!--a-entity id="gun" shooter="" click-to-shoot="" position="0 0 -1" oculus-go-controls="hand: right" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #camera;"></a-entity-->
+
+  </a-entity>
+
+  </a-scene>
+</body>
