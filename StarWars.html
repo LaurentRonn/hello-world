@@ -49,10 +49,9 @@
 
     <!--a-draw-curve curveref="#track1" material="shader: line; color: red;"></a-draw-curve-->
 
-
-  <a-entity id="cameraRig">
-        <!-- camera -->
-      <a-entity id="head" camera="" rotation="" look-controls="" wasd-controls=""></a-entity></a-entity>
+<a-entity id="cameraRig" alongpath="curve: #track1; dur: 72000; loop: true">
+          <!-- camera -->
+          <a-entity id="head" camera="" rotation="" look-controls="" wasd-controls=""></a-entity>
 
 </a-scene>
 
