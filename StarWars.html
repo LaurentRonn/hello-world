@@ -3,18 +3,20 @@
   <head>
     <meta charset="utf-8">
     <title>StarWars.VR</title>
-    <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+    <meta name="description" content="StarWarsVR">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
-    <script src="https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js"></script>
+      <!-- Animation scripts -->
+      <script src="https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js"></script>
     <script src="https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js"></script>
-
-  </head>
-  <body>
-
+    </head>
+    
+<body>
+    
     <a-scene background="color: #fff">
-
-  <a-assets>
+        
+        <a-assets>
     <img id="mozvr" src="./assets/images/mozvr.png">
     <img id="shadow2" src="./assets/images/radial-shadow.png">
     <img id="ui1" src="./assets/images/field.jpg">
@@ -22,39 +24,58 @@
     <img id="ui3" src="./assets/images/xwings.jpg">
     <img id="skyTexture" src="./assets/images/stars.png">
     <img id="title" src="./assets/images/Star%20waRS.png">
-  </a-assets>
+    <a-sound src="./assets/audio/Last%20Sunset.mp3" autoplay="true" position="0 4 0" sound="loop: true"></a-sound>
+            
+            <img id="databank" src="./assets/images/DataBank.jpg">
+            <img id="text" src="./assets/images/GameFeaturesText.jpg">
+            <img id="game" src="./assets/images/GameMain.jpg">
+            <img id="trailer" src="./assets/images/GameplayTrailer.jpg">
+            <img id="extras" src="./assets/images/Games&Apps.jpg">
+            <img id="news" src="./assets/images/LatestNews&Blog.jpg">
+            <img id="gallery" src="./assets/images/Screenshots&Gallery.jpg">
+            <img id="footer" src="./assets/images/PageFooter.jpg">
+            <img id="menubar" src="./assets/images/MenuBar.jpg">
+        </a-assets>
+    
+        <a-sky id="background" src="#skyTexture" radius="500"></a-sky>
+        
+        <!-- Images 
+        <a-curvedimage src="#ui3" radius="5.7" theta-length="180" height="9" rotation="0 90 0" scale="1.2 1.2 1.2" material="" geometry="height: 4; thetaLength: 180" position="0 3 0"></a-curvedimage>
+        <a-curvedimage src="#mozvr" radius="5.7" theta-length="17" height=".36" opacity="0.2" rotation="0 250 0" position="0 2 0"></a-curvedimage>
+        <a-curvedimage src="#ui1" radius="5.7" theta-length="72" height="2.6" rotation="0 55 0" position="0 0.7 6" scale="" material="" geometry="thetaLength: 72"></a-curvedimage>
+        <a-curvedimage src="#ui2" radius="5.7" theta-length="70" height="3.02" rotation="0 -90 0" scale="3 3 3" material="" geometry="radius: 8; thetaLength: 40" position="7 4 2"></a-curvedimage>
+        <a-image position="" src="#shadow2" rotation="-90 0 0" scale="30 30 30" material="" geometry="" id="floor"></a-image> -->
+        
+        
+        <!-- Page elements -->
+        
+        <a-image src="#title" width="3" height="1.5" material="" geometry="height: 0.36" scale="5 5 5" position="0 20 -10"></a-image>
 
-<a-sound src="./assets/audio/Last%20Sunset.mp3" autoplay="true" position="0 3.67097 0" sound="loop: false" id="updateMe"></a-sound>
-
-<a-sky id="background" src="#skyTexture" radius="500"></a-sky>
-
-  <a-curvedimage src="#ui3" radius="5.7" theta-length="180" height="9" rotation="0 90 0" scale="1.2 1.2 1.2" material="" geometry="height: 4; thetaLength: 180" position="0 3 0"></a-curvedimage>
-
-  <a-image src="#title" width="3" height="1.5" material="" geometry="height: 0.36" scale="5 5 5" position="0 15 -10"></a-image>
-
-  <a-curvedimage src="#mozvr" radius="5.7" theta-length="17" height=".36"
-                 opacity="0.2" rotation="0 250 0" position="0 2 0"></a-curvedimage>
-
-  <a-curvedimage src="#ui1" radius="5.7" theta-length="72" height="2.6" rotation="0 55 0" position="0 0.7 6" scale="" material="" geometry="thetaLength: 72"></a-curvedimage>
-
- <a-curvedimage src="#ui2" radius="5.7" theta-length="70" height="3.02" rotation="0 -90 0" scale="3 3 3" material="" geometry="radius: 8; thetaLength: 40" position="7 4 2"></a-curvedimage>
-
-  <a-image position="" src="#shadow2" rotation="-90 0 0" scale="30 30 30" material="" geometry="" id="floor"></a-image>
-
-  <a-curve id="track1">
-<a-curve-point id="start" position="0 10 20" rotation="0 180 0"></a-curve-point>
-<a-curve-point id="middle" position="0 -1 0"></a-curve-point>
-<a-curve-point id="end" position="15 15 -6"></a-curve-point>
-    </a-curve>
+        <a-curvedimage src="#game" radius="5.7" theta-length="180" height="9" rotation="0 135 0" scale="" material="" geometry="height: 5; radius: 10; segmentsRadial: 32; thetaLength: 90" position="0 8 5"></a-curvedimage>
+        <a-image src="#text" width="3" height="1.5" material="" geometry="width: 6; height: 3" scale="" position="0 2.5 -2" rotation=""></a-image>
+        <a-image src="#news" width="3" height="1.5" material="" geometry="width: 2; height: 2" scale="" position="4.2 2.5 -1" rotation="-20 0 0"></a-image>
+        <a-image src="#trailer" width="3" height="1.5" material="" geometry="width: 4; height: 2" scale="" position="-5 2.5 -1" rotation="-20 0 0"></a-image>
+        <a-image src="#menubar" width="3" height="1.5" material="" geometry="height: 0.36" scale="" position="0 1 -0.5" rotation="-45 0 0"></a-image>
+        <a-curvedimage src="#databank" radius="5.7" theta-length="180" height="9" rotation="0 45 0" scale="" material="" geometry="height: 8; radius: 6.5; thetaLength: 90" position="3 5 4"></a-curvedimage>
+        <a-curvedimage src="#gallery" radius="5.7" theta-length="180" height="9" rotation="0 225 0" scale="" material="" geometry="height: 8; radius: 6; thetaLength: 90" position="-3 5 4"></a-curvedimage>
+        <a-curvedimage src="#footer" radius="5.7" theta-length="180" height="9" rotation="0 -45 0" scale="1.2 1.2 1.2" material="" geometry="height: 1; radius: 5; thetaLength: 90" position="0 1 5"></a-curvedimage>
+        <a-curvedimage src="#extras" radius="5.7" theta-length="180" height="9" rotation="0 -45 0" scale="1.2 1.2 1.2" material="" geometry="height: 2; radius: 5; thetaLength: 90" position="0 4 5"></a-curvedimage>
+        <!-- Animated Track -->
+        
+        <a-curve id="track1" curve="">
+            <a-curve-point id="start" position="0 7 10" rotation="0 180 0" curve-point=""></a-curve-point>
+            <a-curve-point id="middle" position="0 2.5 6" curve-point=""></a-curve-point>
+            <a-curve-point id="end" position="0 2 4" curve-point=""></a-curve-point>
+        </a-curve>
 
     <!--a-draw-curve curveref="#track1" material="shader: line; color: red;"></a-draw-curve-->
-
-<a-entity id="cameraRig" alongpath="curve: #track1; dur: 72000; loop: true">
+        
+        <!-- PlayerCamera -->
+        <a-entity id="cameraRig" alongpath="curve: #track1; dur: 72000; loop: false">
           <!-- camera -->
           <a-entity id="head" camera="" rotation="" look-controls="" wasd-controls=""></a-entity>
+        </a-entity>
 
 </a-scene>
-
-
-  </body>
+    </body>
 </html>
